@@ -1,0 +1,31 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserModel {
+  id: ID!
+  name: String!
+  email: String!
+  role_id: Int!
+}
+
+type Query {
+  users: [UserModel!]!
+}
+
+type Mutation {
+  createUser(user: UserCreateInput!): UserModel!
+  updateUser(user: UserUpdateInput!): UserModel!
+}
+
+input UserCreateInput {
+  name: String!
+  email: String!
+}
+
+input UserUpdateInput {
+  name: String!
+  email: String!
+  id: String!
+  role_id: Float!
+}
