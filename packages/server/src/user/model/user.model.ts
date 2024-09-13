@@ -1,4 +1,31 @@
 import { ObjectType, Field, ID, Int } from '@nestjs/graphql';
+import { IsInt, IsNotEmpty, IsString } from 'class-validator';
+
+@ObjectType()
+export class RoleModel {
+  @Field()
+  @IsNotEmpty()
+  @IsInt()
+  id: number;
+
+  @Field()
+  @IsNotEmpty()
+  @IsString()
+  name: string;
+}
+
+@ObjectType()
+export class UserStateModel {
+  @Field()
+  @IsNotEmpty()
+  @IsInt()
+  id: number;
+
+  @Field()
+  @IsNotEmpty()
+  @IsString()
+  name: string;
+}
 
 @ObjectType()
 export class UserModel {
@@ -11,8 +38,11 @@ export class UserModel {
   @Field(() => String)
   email: string;
 
-  @Field(() => Int)
-  role_id: number;
+  @Field(() => RoleModel)
+  role: RoleModel;
+
+  @Field(() => UserStateModel)
+  user_state: RoleModel;
 }
 
 // @ObjectType()

@@ -16,15 +16,26 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type BatchPayload = {
+  __typename?: 'BatchPayload';
+  count: Scalars['Float']['output'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createUser: UserModel;
+  deleteUser: BatchPayload;
   updateUser: UserModel;
 };
 
 
 export type MutationCreateUserArgs = {
   user: UserCreateInput;
+};
+
+
+export type MutationDeleteUserArgs = {
+  userIds: Array<Scalars['String']['input']>;
 };
 
 
@@ -37,9 +48,17 @@ export type Query = {
   users: Array<UserModel>;
 };
 
+export type RoleModel = {
+  __typename?: 'RoleModel';
+  id: Scalars['Float']['output'];
+  name: Scalars['String']['output'];
+};
+
 export type UserCreateInput = {
   email: Scalars['String']['input'];
   name: Scalars['String']['input'];
+  role_id: Scalars['Float']['input'];
+  user_state_id: Scalars['Float']['input'];
 };
 
 export type UserModel = {
@@ -47,7 +66,14 @@ export type UserModel = {
   email: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
-  role_id: Scalars['Int']['output'];
+  role: RoleModel;
+  user_state: UserStateModel;
+};
+
+export type UserStateModel = {
+  __typename?: 'UserStateModel';
+  id: Scalars['Float']['output'];
+  name: Scalars['String']['output'];
 };
 
 export type UserUpdateInput = {
@@ -55,4 +81,5 @@ export type UserUpdateInput = {
   id: Scalars['String']['input'];
   name: Scalars['String']['input'];
   role_id: Scalars['Float']['input'];
+  user_state_id: Scalars['Float']['input'];
 };

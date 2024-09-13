@@ -3,6 +3,29 @@ query getUsers {
     id
     email
     name
-    role_id
+    role {
+      id
+      name
+    }
+    user_state {
+      id
+      name
+    }
+  }
+}
+
+mutation createUser($user: UserCreateInput!) {
+  createUser(user: $user) {
+    id
+    name
+    email
+    role {
+      id
+      name
+    }
+    user_state {
+      id
+      name
+    }
   }
 }

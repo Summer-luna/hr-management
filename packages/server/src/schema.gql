@@ -2,11 +2,26 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type RoleModel {
+  id: Float!
+  name: String!
+}
+
+type UserStateModel {
+  id: Float!
+  name: String!
+}
+
 type UserModel {
   id: ID!
   name: String!
   email: String!
-  role_id: Int!
+  role: RoleModel!
+  user_state: UserStateModel!
+}
+
+type BatchPayload {
+  count: Float!
 }
 
 type Query {
@@ -16,16 +31,20 @@ type Query {
 type Mutation {
   createUser(user: UserCreateInput!): UserModel!
   updateUser(user: UserUpdateInput!): UserModel!
+  deleteUser(userIds: [String!]!): BatchPayload!
 }
 
 input UserCreateInput {
   name: String!
   email: String!
+  role_id: Float!
+  user_state_id: Float!
 }
 
 input UserUpdateInput {
   name: String!
   email: String!
-  id: String!
   role_id: Float!
+  user_state_id: Float!
+  id: String!
 }

@@ -19,10 +19,18 @@ model User {
   email String @unique
   role_id Int @default(0)
   role Role @relation(fields: [role_id], references: [id])
+  user_state_id Int @default(0)
+  user_state UserState @relation(fields: [user_state_id], references: [id])
 }
 
 
-model Role{
+model Role {
+  id Int @default(autoincrement()) @id
+  name String @unique
+  users User[]
+}
+
+model UserState {
   id Int @default(autoincrement()) @id
   name String @unique
   users User[]

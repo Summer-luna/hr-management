@@ -23,11 +23,14 @@
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.16.7",
     "@types/node": "^22.3.0",
+    "formik": "^2.4.6",
     "graphql": "^16.9.0",
+    "lodash": "^4.17.21",
     "prettier": "^3.3.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.0"
+    "react-router-dom": "^6.26.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.7.0",

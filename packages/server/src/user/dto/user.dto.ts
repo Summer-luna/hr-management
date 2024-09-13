@@ -3,7 +3,7 @@ import {
   IsEmail,
   IsInt,
   IsNotEmpty,
-  IsOptional,
+  IsNumber,
   IsString,
 } from 'class-validator';
 
@@ -19,6 +19,16 @@ export class UserCreateInput {
   @IsNotEmpty()
   @IsString()
   email: string;
+
+  @Field()
+  @IsNotEmpty()
+  @IsInt()
+  role_id: number;
+
+  @Field()
+  @IsNotEmpty()
+  @IsInt()
+  user_state_id: number;
 }
 
 @InputType()
@@ -27,9 +37,4 @@ export class UserUpdateInput extends UserCreateInput {
   @IsNotEmpty()
   @IsString()
   id: string;
-
-  @Field()
-  @IsNotEmpty()
-  @IsInt()
-  role_id: number;
 }

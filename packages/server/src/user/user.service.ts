@@ -1,23 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'nestjs-prisma';
-import { User } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 import { UserCreateInput, UserUpdateInput } from './dto/user.dto';
+import { UserModel } from './model/user.model';
 
 @Injectable()
 export class UserService {
   constructor(private prismaService: PrismaService) {}
 
-  async users(): Promise<User[]> {
-    return this.prismaService.user.findMany();
-  }
-
-  async createUser(user: UserCreateInput): Promise<User> {
-    return this.prismaService.user.create({
-      data: user,
+  async users(): Promise<UserModel[]> {
+    return this.prismaService.user.findMany({
+      include: {
+        role: true,
+        user_state: true,
+      },
     });
   }
 
-  async updateUser(user: UserUpdateInput): Promise<User> {
+  async createUser(user: UserCreateInput): Promise<UserModel> {
+    return this.prismaService.user.create({
+      data: user,
+      include: {
+        role: true,
+        user_state: true,
+      },
+    });
+  }
+
+  async updateUser(user: UserUpdateInput): Promise<UserModel> {
     const { id } = user;
 
     const isExist = await this.exists(id);
@@ -29,6 +39,10 @@ export class UserService {
         id: id,
       },
       data: user,
+      include: {
+        role: true,
+        user_state: true,
+      },
     });
   }
 
@@ -42,5 +56,13 @@ export class UserService {
     });
 
     return employeeCount > 0;
+  }
+
+  async deleteUsers(userIds: string[]): Promise<Prisma.BatchPayload> {
+    return this.prismaService.user.deleteMany({
+      where: {
+        id: { in: userIds },
+      },
+    });
   }
 }
