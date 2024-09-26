@@ -28,7 +28,7 @@ const initialValue: EmployeeFormType = {
   status: 1,
 };
 
-export const EmployeeCreateForm = () => {
+export const EmployeeForm = ({ formSubmitHandler }) => {
   const [createUser] = useCreateUserMutation();
   const navigateTo = useNavigate();
 

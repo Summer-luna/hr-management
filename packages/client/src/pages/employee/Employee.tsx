@@ -39,18 +39,11 @@ const rows = [
 
 export const Employee = () => {
   const { data, error } = useGetUsersQuery();
-  const employees = data?.users || [];
-  const [rows, setRows] = useState([]);
+  const users = data?.users || [];
 
-  useEffect(() => {
-    let rows = [];
-    for (const employee of employees) {
-      const { id, name, email, role, user_state } = employee;
-
-      rows.push(createData(id, name, email, role.name, user_state.name));
-    }
-    setRows(rows);
-  }, []);
+  const rows = users.map(({ id, name, email, role, user_state }) => {
+    return createData(id, name, email, role.name, user_state.name);
+  });
 
   const columns = [
     create_column("name", "Name", (row: any) => row.name),

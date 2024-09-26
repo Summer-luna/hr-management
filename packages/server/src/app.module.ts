@@ -15,7 +15,7 @@ import { join } from 'node:path';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       cors: {
-        origin: ['http://localhost:5173'],
+        origin: ['*'],
         preflightContinue: true,
         credentials: true,
       },
